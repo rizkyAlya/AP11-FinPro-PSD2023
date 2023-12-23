@@ -9,7 +9,7 @@ entity Checker is
         input_password : in std_logic_vector(31 downto 0);
         correct_password : in std_logic_vector(31 downto 0);
         access_granted : out std_logic;
-        access_denied : out std_logic
+	    access_denied : out std_logic
     );
 end Checker;
 
