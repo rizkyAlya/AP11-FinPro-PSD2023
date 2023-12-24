@@ -59,7 +59,7 @@ In this testbench code, the correct password given is 123456, and the passwords 
 ### Waveform
 The following is a wave simulation conducted in ModelSim for the correct password, which is 123456.
 
-![Result Correct](assets/ResultCorrect.png)
+![Result Correct](assets/ResultCorrect.jpg)
 
 The following is a waveform simulation conducted in ModelSim with the correct password as input.
 
@@ -73,3 +73,5 @@ We can see the difference in the access_granted and access_denied flag. When the
 
 ### Synthesis
 By using the sythesis feature provided by Quartus, we are able to get:
+
+![Synthesis](assets/synthesis.jpg)
