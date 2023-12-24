@@ -2,7 +2,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
-entity MD5 is
+entity MD5_2 is
     Port ( data_in:     in  STD_LOGIC_VECTOR (31 downto 0);
            data_out:    out STD_LOGIC_VECTOR (31 downto 0) := (others => '0');
            done:        out STD_LOGIC := '0';
@@ -10,9 +10,9 @@ entity MD5 is
            start:       in  STD_LOGIC;
            clk:         in  STD_LOGIC;
            reset:       in  STD_LOGIC);
-end MD5;
+end MD5_2;
 
-architecture Behavioral of MD5 is
+architecture Behavioral of MD5_2 is
 subtype uint512_t is unsigned(0 to 1048576);
 subtype uint32_t is unsigned(31 downto 0);
 subtype uint8_t is unsigned(7 downto 0);
