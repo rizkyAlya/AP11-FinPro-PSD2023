@@ -10,7 +10,7 @@ One increasingly popular security system is the keypad door lock system, utilizi
 4. Implementing Hashing with the MD-5 Algorithm in the design.
 
 ## Implementation
-The Keypad Door Lock System with Anti-Tampering is implemented using a 6-bit integer code. Users are prompted to input the code through a keypad, which is then converted into an integer value. If a user fails to input the correct code three times consecutively, the system detects suspicious attempts. Upon each unsuccessful attempt, the system records the number of attempts and takes action if the predefined limit is reached. This anti-tampering detection can trigger additional security measures, such as notifying the owner to take further action. Consequently, the system enhances door security by responding to suspicious activities and effectively addressing unauthorized attempts.
+The Keypad Door Lock System with Anti-Tampering is implemented using a 6-bit integer code. Users are prompted to input the code through a keypad, which is then converted into an integer value. Upon each unsuccessful attempt, the system records the number of attempts and takes action if the predefined limit is reached. This anti-tampering detection can trigger additional security measures, such as notifying the owner to take further action. Consequently, the system enhances door security by responding to suspicious activities and effectively addressing unauthorized attempts.
 
 To increase the security level of this system, the code undergoes hashing before verification. The hashing algorithm employed is MD5. However, since the hashing function only accepts binary inputs, the integer-based code input undergoes a conversion process. The following code snippet performs the conversion of the user-input code.
 
@@ -41,18 +41,35 @@ The ConverterPassword component converts an integer-based password into a 32-bit
 The temporal aspects are managed by a clock process, and the Alur_Program process defines the sequence of actions for the testbench, including initiating hashing processes and verifying results through the Checker component.
 
 ## Testing
-We test our program by having the program flow of:
+To facilitate the testing process, a testbench code is used. Signals for system-wide reset and clock are defined, followed by the definition of signals for each component involved in this testing, namely converterPassword, MD5, and checker. After defining these components, the next step is to perform port mapping between the testbench signals and the ports in the components. The following is the code used to organize the flow of the testbench.
 
-1. Converting the Correct Password.
-2. Applying hashing to the Correct Password.
-3. Converting the Input Password.
-4. Applying hashing to the Input Password.
-5. Comparing the two passwords.
+1. Performing a reset for all programs.
+2. Performing the conversion for the correct password. This conversion is done from decimal to binary.
+3. Performing hashing on the converted password.
+4. Saving the password to the signal savePassword1.
+5. Performing conversion for the password entered by the user.
+6. Performing hashing on the converted password.
+7. Saving the password to the signal savePassword2.
+8. Comparing savePassword1 and savePassword2.
+
+In this testbench code, the correct password given is 123456, and the passwords to be tested are 123456 (to observe the system output when the correct password is entered) and 123400 (to observe the system output when an incorrect password is entered).
 
 ## Results
 
 ### Waveform
-By taking advantage of the wave feature of Modelsim, we are able to get:
+The following is a wave simulation conducted in ModelSim for the correct password, which is 123456.
+
+![Result Correct](assets/ResultCorrect.png)
+
+The following is a waveform simulation conducted in ModelSim with the correct password as input.
+
+![Correct Password](assets/CorrectPassword.png)
+
+The following is a waveform simulation conducted in ModelSim with an incorrect password as input.
+
+![Incorrect Password](assets/IncorrectPassword.png)
+
+We can see the difference in the access_granted and access_denied flag. When the user inputs a correct password, then the program's access_granted flag will be 1 and the access_denied will be 0. And the opposite applies when the user inputs an incorrect password, the access_denied flag will be 1 and the access_granted flag wil be 0.
 
 ### Synthesis
 By using the sythesis feature provided by Quartus, we are able to get:
